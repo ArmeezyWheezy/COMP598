@@ -13,7 +13,7 @@ bearer_token = "AAAAAAAAAAAAAAAAAAAAAB%2FKVgEAAAAAuvlm7K%2BW7FW9nJhP82%2FOM%2BMY
 date_today = datetime.datetime.fromisoformat((datetime.date.today() - datetime.timedelta(days=3)).isoformat()).isoformat(timespec="seconds")+'Z'
 
 # Hardcoded domain and entity key for news.covid19
-query_params = {'query': '(COVID OR COVID 19 OR #covid OR #covid-19 OR #covid19) '
+query_params = {'query': '(COVID OR COVID 19 OR #covid OR #covid-19 OR #covid19) -(tortilla blanket)'
                          'context:123.1220701888179359745 -is:reply -is:retweet -is:quote -has:links lang:en',
                 'tweet.fields': 'created_at,geo',
                 'expansions': 'geo.place_id',
