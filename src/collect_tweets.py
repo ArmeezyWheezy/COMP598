@@ -10,11 +10,11 @@ import argparse
 bearer_token = "AAAAAAAAAAAAAAAAAAAAAB%2FKVgEAAAAAuvlm7K%2BW7FW9nJhP82%2FOM%2BMYsXc" \
                "%3D6Tiv1QcsJuH5L4T2DPBbxRcVb33G8EsaSs2i02qTGjGt9aouxS"
 # bearer_token = os.environ.get("BEARER_TOKEN")
-date_today = datetime.datetime.fromisoformat(datetime.date.today().isoformat()).isoformat(timespec="seconds")+'Z'
+date_today = datetime.datetime.fromisoformat((datetime.date.today() - datetime.timedelta(days=3)).isoformat()).isoformat(timespec="seconds")+'Z'
 
 # Hardcoded domain and entity key for news.covid19
-query_params = {'query': 'Canada (COVID OR COVID 19 OR #covid OR #covid-19 OR #covid19) '
-                         'context:123.1220701888179359745 -is:retweet lang:en',
+query_params = {'query': '(COVID OR COVID 19 OR #covid OR #covid-19 OR #covid19) '
+                         'context:123.1220701888179359745 -is:reply -is:retweet -is:quote -has:links lang:en',
                 'tweet.fields': 'created_at,geo',
                 'expansions': 'geo.place_id',
                 'place.fields': 'country',
@@ -40,11 +40,15 @@ def run_pagination(first_response, url):
     """
     next_query = query_params
     for i in range(9):
-        next_query['next_token'] = first_response['meta']['next_token']
-        next_json_response = connect_to_endpoint(url, next_query)
-        for tweet in next_json_response['data']:
-            first_response['data'].append(tweet)
-        first_response['meta']['next_token'] = next_json_response['meta']['next_token']
+        if 'next_token' in first_response['meta']:
+            next_query['next_token'] = first_response['meta']['next_token']
+            next_json_response = connect_to_endpoint(url, next_query)
+            for tweet in next_json_response['data']:
+                first_response['data'].append(tweet)
+            if 'next_token' in next_json_response['meta']:
+                first_response['meta']['next_token'] = next_json_response['meta']['next_token']
+            else:
+                first_response['meta'].pop('next_token', None)
 
     return first_response
 
