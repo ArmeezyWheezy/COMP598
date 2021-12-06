@@ -75,7 +75,9 @@ def dump_to_csv(json_dict):
     pandas_dict = {
         'id': [],
         'created_at': [],
-        'text': []
+        'text': [],
+        'topic': [],
+        'sentiment': []
     }
     for tweet in json_dict['data']:
         pandas_dict['id'].append(tweet['id'])
