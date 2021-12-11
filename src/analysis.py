@@ -8,7 +8,7 @@ from pathlib import Path
 
 stowpath = os.path.join(Path(__file__).parents[1],"src","stopwords.txt")
 resultpath = os.path.join(Path(__file__).parents[1],"src","result.json")
-datapath = os.path.join(Path(__file__).parents[1],"src","data.csv")
+datapath = os.path.join(Path(__file__).parents[1],"data","data.csv")
 stopwords = []
 stopfile = open(stowpath,"r").read().split("\n")
 for i in stopfile:
@@ -23,6 +23,7 @@ word_total = {'Restrictions':0,'Demography':0, 'Impact':0, 'Vaccine':0, 'Variant
 tf_idf_data = {'Restrictions':{},'Demography':{}, 'Impact':{}, 'Vaccine':{}, 'Variant':{}, 'Symptoms':{},'Testing':{},'Other':{}}
 result = {}
 
+numofpost = 0
 
 csvfile = open(datapath,"r",encoding="utf8")
 csv_reader = reader(csvfile)
@@ -30,6 +31,7 @@ csv_reader = reader(csvfile)
 for i in csv_reader:
     category = i[4]
     if (category in data):
+        numofpost += 1
         a = re.sub("[^a-zA-Z0-9]"," ",i[3]).lower()
         j = a.split(" ")
         for l in j:
@@ -71,5 +73,8 @@ for i in data:
 
 print(json.dumps(result,indent=4))
 
+print(numofpost)
+
 with open(resultpath,"w") as f:
     json.dump(result,f,indent=4)
+f.close()
