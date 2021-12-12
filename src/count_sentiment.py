@@ -28,13 +28,13 @@ words = ["rules",
         "gmt",
         "coronavirusupdate",
         "coronaviruspandemic",
-        "died",
         "coronavirus",
+        "23",
+        "died",
         "total",
+        "deaths",
         "australia",
         "chaos",
-        "ab",
-        "black",
         "team",
         "union",
         "died",
@@ -59,12 +59,12 @@ words = ["rules",
         "african",
         "variant",
         "omnicron",
+        "coronavirus",
         "cost",
         "strain",
         "rise",
         "stocks",
         "milder",
-        "reports",
         "throat",
         "breathe",
         "symptoms",
@@ -96,7 +96,7 @@ words = ["rules",
         "seh",
         "ig"]
 
-j = len(words)
+k = len(words)
 
 with open(resultpath, mode='w') as f:
     writer = csv.writer(f)
@@ -104,20 +104,98 @@ with open(resultpath, mode='w') as f:
 
     i = 0
 
-    for i in range(j):
-        sent = [words[i],0,0,0]
-        word = words[i]
+    for n in range(k):
+        sent = [words[n],0,0,0]
+        word = words[n]
         csvfile = open(datapath, "r", encoding="utf8")
         csv_reader = reader(csvfile)
         for i in csv_reader:
-            a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
-            j = a.split(" ")
-            if word in j:
-                if i[5] == "Positive":
-                    sent[1] += 1
-                elif i[5] == "Negative":
-                    sent[2] += 1
-                else:
-                    sent[3] += 1
+            if n < 10:
+                if i[4] == "Restrictions": 
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 9<n<20:
+                if i[4]== "Demography": 
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 19<n<30:
+                if i[4] == "Impact":
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 29<n<40:
+                if i[4] == "Vaccine":
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 39<n<50:
+                if i[4] == "Variant":
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 49<n<60:
+                if i[4] == "Symptoms":
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            elif 59<n<70:
+                if i[4] == "Testing":
+                    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                    j = a.split(" ")
+                    if word in j:
+                        if i[5] == "Positive":
+                            sent[1] += 1
+                        elif i[5] == "Negative":
+                            sent[2] += 1
+                        else:
+                            sent[3] += 1
+            else:
+                a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+                j = a.split(" ")
+                if word in j:
+                    if i[5] == "Positive":
+                        sent[1] += 1
+                    elif i[5] == "Negative":
+                        sent[2] += 1
+                    else:
+                        sent[3] += 1
         writer.writerow (sent)
 f.close()

@@ -6,7 +6,7 @@ from csv import reader
 from pathlib import Path
 
 stowpath = os.path.join(Path(__file__).parents[1], "src", "stopwords.txt")
-resultpath = os.path.join(Path(__file__).parents[1], "src", "result.json")
+resultpath = os.path.join(Path(__file__).parents[1], "data", "result.json")
 datapath = os.path.join(Path(__file__).parents[1], "data", "data.csv")
 stopwords = []
 stopfile = open(stowpath, "r").read().split("\n")
@@ -77,18 +77,9 @@ for i in data:
     for j in data[i]:
         tf_idf_data[i][j] = tf_data[i][j] * idf_data[i][j]
 
+
 for i in data:
-    result[i] = sorted(tf_idf_data[i], key=tf_idf_data[i].get, reverse=True)[:int(10)]
-
-words = []
-
-for i in result:
-    words += (result.get(i))
-print(words)
-
-
-
-
+    result[i] = sorted(tf_idf_data[i], key=tf_idf_data[i].get, reverse=True)[:10]
 
 
 with open(resultpath, "w") as f:
