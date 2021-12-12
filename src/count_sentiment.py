@@ -7,7 +7,7 @@ from csv import reader
 from pathlib import Path
 
 stowpath = os.path.join(Path(__file__).parents[1], "src", "stopwords.txt")
-resultpath = os.path.join(Path(__file__).parents[1], "src", "sentiment.csv")
+resultpath = os.path.join(Path(__file__).parents[1], "data", "sentiment.csv")
 datapath = os.path.join(Path(__file__).parents[1], "data", "data.csv")
 stopwords = []
 stopfile = open(stowpath, "r").read().split("\n")
@@ -24,6 +24,7 @@ j = len(words)
 
 with open(resultpath, mode='w') as f:
     writer = csv.writer(f)
+    writer.writerow(["Topic","Positive","Negative","Neutral"])
 
     i = 0
 
@@ -36,7 +37,7 @@ with open(resultpath, mode='w') as f:
             a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
             j = a.split(" ")
             if word in j:
-                if i[5] == "Postive":
+                if i[5] == "Positive":
                     sent[1] += 1
                 elif i[5] == "Negative":
                     sent[2] += 1
