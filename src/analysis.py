@@ -80,9 +80,14 @@ for i in data:
 for i in data:
     result[i] = sorted(tf_idf_data[i], key=tf_idf_data[i].get, reverse=True)[:int(10)]
 
-print(json.dumps(result, indent=4))
+words = []
 
-print(word)
+for i in result:
+    words += (result.get(i))
+print(words)
+
+
+
 
 
 
