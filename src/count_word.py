@@ -19,15 +19,15 @@ csv_reader = reader(csvfile)
 
 topic = ["Restrictions","Demography","Impact","Vaccine","Variant","Symptoms","Testing","Other"]
 sentiment = ["Positive","Negative","Neutral"]
+
+
 result = {"Positive":0,"Negative":0,"Neutral":0}
+top = input("Enter the topic(Restrictions,Demography,Impact,Vaccine,Variant,Symptoms,Testing,Other)\t")
+word = input("Enter word\t")
+for i in csv_reader:
+    a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+    j = a.split(" ")
+    if word in j:
+        result[i[5]] += 1
 
-while True:
-    top = input("Enter the topic(Restrictions,Demography,Impact,Vaccine,Variant,Symptoms,Testing,Other)\t")
-    word = input("Enter word\t")
-    for i in csv_reader:
-        a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
-        j = a.split(" ")
-        if word in j:
-            result[i[5]] += 1
-
-    print(result)
+print(result)
