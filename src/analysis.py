@@ -6,7 +6,7 @@ from csv import reader
 from pathlib import Path
 
 stowpath = os.path.join(Path(__file__).parents[1], "src", "stopwords.txt")
-resultpath = os.path.join(Path(__file__).parents[1], "data", "result.json")
+resultpath = os.path.join(Path(__file__).parents[1], "src", "result.json")
 datapath = os.path.join(Path(__file__).parents[1], "data", "data.csv")
 stopwords = []
 stopfile = open(stowpath, "r").read().split("\n")
@@ -34,6 +34,7 @@ csv_reader = reader(csvfile)
 topic = ["Restrictions","Demography","Impact","Vaccine","Variant","Symptoms","Testing","Other"]
 sentiment = ["Positive","Negative","Neutral"]
 
+numofpost = 0
 
 for i in csv_reader:
     category = i[4]
@@ -78,6 +79,16 @@ for i in data:
 
 for i in data:
     result[i] = sorted(tf_idf_data[i], key=tf_idf_data[i].get, reverse=True)[:int(10)]
+
+words = []
+
+for i in result:
+    words += (result.get(i))
+print(words)
+
+
+
+
 
 
 with open(resultpath, "w") as f:

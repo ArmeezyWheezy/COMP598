@@ -1,21 +1,6 @@
-import json
-import os
-import math
-import re
-import csv
-from csv import reader
-from pathlib import Path
-
-stowpath = os.path.join(Path(__file__).parents[1], "src", "stopwords.txt")
-resultpath = os.path.join(Path(__file__).parents[1], "data", "sentiment.csv")
-datapath = os.path.join(Path(__file__).parents[1], "data", "data.csv")
-stopwords = []
-stopfile = open(stowpath, "r").read().split("\n")
-for i in stopfile:
-    stopwords.append(i)
-
-
-words = ["rules",
+{
+    "Restrictions": [
+        "rules",
         "flight",
         "lockdowns",
         "flying",
@@ -24,7 +9,9 @@ words = ["rules",
         "sitting",
         "jim",
         "sing",
-        "risky",
+        "risky"
+    ],
+    "Demography": [
         "gmt",
         "coronavirusupdate",
         "coronaviruspandemic",
@@ -34,7 +21,9 @@ words = ["rules",
         "australia",
         "chaos",
         "ab",
-        "black",
+        "black"
+    ],
+    "Impact": [
         "team",
         "union",
         "died",
@@ -44,7 +33,9 @@ words = ["rules",
         "psychological",
         "issue",
         "ill",
-        "profits",
+        "profits"
+    ],
+    "Vaccine": [
         "shot",
         "booster",
         "boosters",
@@ -54,7 +45,9 @@ words = ["rules",
         "reactions",
         "mrna",
         "unvaxxed",
-        "jabs",
+        "jabs"
+    ],
+    "Variant": [
         "omicron",
         "african",
         "variant",
@@ -64,7 +57,9 @@ words = ["rules",
         "rise",
         "stocks",
         "milder",
-        "reports",
+        "reports"
+    ],
+    "Symptoms": [
         "throat",
         "breathe",
         "symptoms",
@@ -74,7 +69,9 @@ words = ["rules",
         "lungs",
         "goodness",
         "headache",
-        "dry",
+        "dry"
+    ],
+    "Testing": [
         "tomorrow",
         "tested",
         "antigen",
@@ -84,7 +81,9 @@ words = ["rules",
         "ur",
         "antibody",
         "absolute",
-        "hey",
+        "hey"
+    ],
+    "Other": [
         "assess",
         "amish",
         "corvid",
@@ -94,30 +93,6 @@ words = ["rules",
         "dems",
         "centers",
         "seh",
-        "ig"]
-
-j = len(words)
-
-with open(resultpath, mode='w') as f:
-    writer = csv.writer(f)
-    writer.writerow(["Topic","Positive","Negative","Neutral"])
-
-    i = 0
-
-    for i in range(j):
-        sent = [words[i],0,0,0]
-        word = words[i]
-        csvfile = open(datapath, "r", encoding="utf8")
-        csv_reader = reader(csvfile)
-        for i in csv_reader:
-            a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
-            j = a.split(" ")
-            if word in j:
-                if i[5] == "Positive":
-                    sent[1] += 1
-                elif i[5] == "Negative":
-                    sent[2] += 1
-                else:
-                    sent[3] += 1
-        writer.writerow (sent)
-f.close()
+        "ig"
+    ]
+}

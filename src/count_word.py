@@ -27,9 +27,10 @@ while True:
     top = input("Enter the topic(Restrictions,Demography,Impact,Vaccine,Variant,Symptoms,Testing,Other)\t")
     word = input("Enter word\t")
     for i in csv_reader:
-        a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
-        j = a.split(" ")
-        if word in j:
-            result[i[5]] += 1
+        if i[4] == top:
+            a = re.sub("[^a-zA-Z0-9]", " ", i[3]).lower()
+            j = a.split(" ")
+            if word in j:
+                result[i[5]] += 1
 
     print(result)
