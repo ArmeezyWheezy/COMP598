@@ -15,9 +15,6 @@ for i in stopfile:
     stopwords.append(i)
 
 
-
-
-
 words = ['rules','flight', 'lockdowns', 'flying', 'sit', 'bla', 'sitting', 'jim', 'sing', 'risky', 'gmt', 'coronavirusupdate', 'coronaviruspandemic', 'died', 'coronavirus', 'total', 'australia', 'chaos', 'ab', 'black', 'team', 'union', 'died', 'philaunion', 'players', 'proud', 'psychological', 'issue', 'ill', 'profits', 'shot', 'booster', 'boosters','shots', 'vaccinated', 'unvaccinated', 'reactions', 'mrna', 'unvaxxed', 'jabs', 'omicron', 'african', 'variant', 'omnicron', 'cost', 'strain', 'rise', 'stocks', 'milder', 'reports', 'throat', 'breathe', 'symptoms', 'smell', 'fever', 'taste', 'lungs', 'goodness', 'headache', 'dry', 'tomorrow', 'tested', 'antigen', 'test', 'results', 'kinda', 'ur', 'antibody', 'absolute', 'hey', 'assess', 'amish', 'corvid', 'deer', 'george', 'killed', 'dems', 'centers', 'seh', 'ig']
 
 j = len(words)
